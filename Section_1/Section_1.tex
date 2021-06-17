@@ -1,0 +1,389 @@
+\documentclass[aspectratio=169]{beamer}
+ 
+\usetheme[sectionpage=none, subsectionpage=none, progressbar=none]{metropolis}           % Use metropolis theme
+ 
+  \usepackage{outlines}
+  \usepackage{caption}
+  \usepackage{appendixnumberbeamer}
+  \usepackage{booktabs}
+  \usepackage{tcolorbox}
+  \usepackage{tabularx}
+  \usepackage[export]{adjustbox}[2011/08/13]
+  \usepackage{bm}
+
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X} 
+  
+ \setbeamertemplate{footline}[frame number]{}
+
+\setbeamertemplate{footline}{% 
+  \hfill% 
+  \usebeamercolor[fg]{page number in head/foot}% 
+  \usebeamerfont{page number in head/foot}% 
+  \insertframenumber%
+  %\,/\,\inserttotalframenumber
+  \kern1em\vskip2pt% 
+}
+
+\makeatletter
+\setbeamertemplate{headline}{%
+  \begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}{section in head/foot}
+    \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+  \end{beamercolorbox}
+}
+\let\@@magyar@captionfix\relax % IMPORTANT: This is a workaround to fix a random eror with the 2018 installation
+\makeatother
+
+\usepackage{xcolor} 
+\listfiles
+
+\setbeamercolor{section in head/foot}{fg=normal text.bg, bg=structure.fg}
+
+    \usepackage{smartdiagram}
+    \usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+
+\title{Gov 2006: Formal Political Theory II \\
+Section 1}
+\date{\today}
+\author{ \textbf{Sophie Hill}}
+
+
+\begin{document}
+  \maketitle
+  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Agenda}
+
+
+
+\begin{itemize}
+\setlength \itemsep{0.5em}
+\item Introductions / logistics
+\end{itemize}
+
+\pause 
+
+How to... 
+\begin{itemize}
+%\setlength \itemsep{0.5em}
+
+\item write up problem sets
+\item read a formal theory paper
+\item come up with your own research idea!
+\end{itemize}
+
+\pause 
+
+Review:
+\begin{itemize}
+\item Definitions
+\item Probabilistic voting model
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Logistics}
+
+\Large
+
+\begin{itemize}
+\setlength \itemsep{0.8em}
+
+\item Section is 5-6pm on Tuesdays. From next week (2/12) onwards, we will be in \alert{CGIS K401}. 
+\pause
+ 
+\item Problem sets are on a weekly basis (for now). PS1 is up on Canvas and is \alert{due next Tuesday 2/12 at 9am}.
+\pause
+
+\item We posted a summary of today's lecture on Canvas -- these bullet points should help to guide your reading each week.
+\end{itemize}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{What is section for?}
+
+This course is a hybrid methods / substantive course. Section will reflect that! For the most part, we will be discussing papers that were not covered in depth in lecture. 
+
+\pause 
+We may also:
+
+\begin{itemize}
+\item review tricky parts of the PSETs
+\pause
+\item review anything that was unclear from lecture
+\pause
+\item brainstorm ideas for the final paper
+\end{itemize}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{How to... do problem sets!}
+
+\Large
+
+\begin{itemize}
+\setlength \itemsep{0.8em}
+\item You can work in groups on the PSETS, but \alert{you must write up your own solutions} and state who you worked with at the top. It is strongly recommended that you read through the PSET on your own before discussing with others.
+\pause
+
+\item Your solutions should be typeset and submitted via Canvas as a PDF.
+\pause
+
+\item Help me (and your future self) out by showing your working!
+
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{How to... read a formal theory paper}
+
+\alert{Unconstrained optimization} $\rightarrow$ read the paper thoroughly, work through each step of the proof with pen \& paper
+
+\pause
+
+\alert{Constrained optimization} $\rightarrow$ look for key elements:
+
+\pause 
+
+\begin{itemize}
+% \setlength \itemsep{0.8em}
+
+\item Motivation
+\item Model set-up
+\item Timing of the game
+\item Solving the model
+\item Comparative statics
+\item Intuitions?
+
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{How to... come up with a research idea}
+
+\Large
+\begin{itemize}
+% \setlength \itemsep{0.8em}
+
+\item No final exam! :)
+\pause 
+\item Instead, a short research paper. Basic formula: existing model + twist = new intuition.
+\pause 
+\item Start thinking about ideas now. We will also do ``brainstorms'' in section. Group meetings to discuss preliminary ideas in Weeks 3/4.
+
+
+\end{itemize} 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Review: Definitions}
+
+\begin{tcolorbox}
+Given an ordering of policies, the preferences of voter $i$ are \textbf{single-peaked} if:
+\vspace{1em}
+
+If $q^{\prime\prime} \leq q^\prime \leq q(\alpha^i) $ or, if $q^{\prime\prime} \geq q^\prime \geq q(\alpha^i) $, then $W(q^{\prime \prime}; \alpha^i) \leq W(q^\prime; \alpha^i)$,
+
+\vspace{1em} where $W$ is the indirect utility function and $q(\alpha^i)$ is voter $i$'s bliss point.
+
+\end{tcolorbox}
+
+\pause 
+
+\begin{tcolorbox}
+Given an ordering of policies and voters, the preferences of a set of voters satisfy the \textbf{single-crossing property} if:
+\vspace{1em}
+
+If $q>q^\prime$ and $\alpha^{i \prime} > \alpha^i$, or if $q<q^\prime$ and $\alpha^{i \prime} < \alpha^i$, then 
+
+\vspace{0.5em} $W(q; \alpha^i) \geq W(q^\prime; \alpha^i) \implies W(q; \alpha^{i \prime}) \geq W(q^\prime ; \alpha^{i \prime}).$
+
+\end{tcolorbox}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Review: Definitions}
+
+\begin{Large}
+What about multi-dimensional policy spaces? 
+\end{Large}
+
+\vspace{1em}
+
+\begin{tcolorbox}
+Let $\bm{q}$ be a \textit{vector} of policies and, as before, let $\alpha^i$ be a scalar. Then voters have \textbf{intermediate preferences} if their indirect utility function $W( \bm{q}; \alpha^i)$ can be written:
+
+$$ W( \bm{q}; \alpha^i) = J(\bm{q}) + K(\alpha^i) H(\bm{q}) $$ 
+
+\vspace{0.5em} 
+where $K(\alpha^i)$ is monotonic in $\alpha^i$, for any $J(\bm{q})$ and $H(\bm{q})$ common to all voters.
+\end{tcolorbox}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Probabilistic Voting}
+
+\begin{itemize} 
+\item Common feature of Probabilistic Voting models is that they introduce \alert{uncertainty} from the candidates' viewpoint
+\pause 
+\item Key advantage (compared to, say, the Median Voter Theorem) is that you can deal with multidimensional policy spaces in a tractable way
+\pause 
+\item There are many ``versions'' of the probabilistic voting model -- this exposition is based on the simple model in PT, which is in turn based on  Lindbeck \& Weibull (1987)
+\end{itemize}
+
+\vspace{2em}
+\small \textit{*This section is based on Prof. Larreguy's lecture slides from 2018.}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\frame{\frametitle{Basic idea of probabilistic voting}
+\begin{itemize}
+\item Let $\pi _{P}^{i}$ be the probability perceived by the candidates that voter $i$ votes for party $P$, where $P=A,B$, and suppose that these probabilities refer to independent events for different voters. 
+\pause 
+\item Since, there are $I$ voters, the expected vote share of party $P$ is then 
+$$ \pi _{P}=\frac{1}{I}\sum_{i=1}^{I}\pi _{P}^{i}. $$
+\item Under Downsian competition with two identical parties, $\pi _{P}^{i}$ jumps discontinuously from 0 to 1 as voter $i$ always votes with certainty for the party that promises the better policy. 
+\pause
+\item Because of these discontinuous jumps, a Nash equilibrium may fail to exist. 
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{\frametitle{Smoothing out discontinuities}
+\begin{itemize}
+\item Probabilistic voting models instead develop a model where 
+$$\pi _{A}^{i}=F^{i}(V(\mathbf{q}_{A};\alpha {i}),V(\mathbf{q}_{B};\alpha ^{i})), $$
+where $F^{i}(\cdot )$ is a smooth function, increasing in the first argument and decreasing in the second. 
+\pause
+\item Note that $\mathbf{q}_{A}$ and $\mathbf{q}_{B}$ can now be $n$ dimensional vectors.
+\pause
+\item This smoothness implies that a small unilateral deviation by one party does not lead to jumps in its expected vote share and thus gives rise to well-defined equilibria.
+\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{\frametitle{Simplifying assumptions}
+
+We often make two further assumptions to make the model more tractable:
+\begin{itemize}
+ 
+\pause 
+\item Choose the simplest functional form for $\pi^i_A$:
+$$ \pi _{A}^{i}=F^{i}(V(\mathbf{q}_{A};\alpha ^{i})-V(\mathbf{q}_{B};\alpha ^{i})) $$
+
+\pause
+
+\item Assume that $F^{i}(\cdot )$ is a continuous and well-behaved cumulative distribution function (c.d.f.), associated with a symmetric probability distribution. 
+
+\pause
+\item In fact, we often go further and consider the special case where all $F^{i}(\cdot )$'s are {\bf uniform}.
+
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{\frametitle{Objective Functions}
+\begin{itemize}
+\item Furthermore, suppose that parties maximize their expected vote share.
+\pause 
+\item In this case, party $A$ sets $\mathbf{q}_{A}$ to maximize: 
+\begin{equation}
+\pi _{A}=\frac{1}{I}\sum_{i=1}^{I}F^{i}(V(\mathbf{q}_{A};\alpha ^{i})-V(%
+\mathbf{q}_{B};\alpha ^{i})).  \label{probablilistic}
+\end{equation}
+
+\pause
+\item Clearly, party $B$ faces a symmetric problem:
+\begin{equation}
+\pi _{B}=1-\pi _{A}\equiv 1-\frac{1}{I}\sum_{i=1}^{I}F^{i}(V(\mathbf{q}%
+_{A};\alpha ^{i})-V(\mathbf{q}_{B};\alpha ^{i})). 
+\end{equation}
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{\frametitle{First-Order Conditions and Nash Equilibrium}
+\begin{itemize}
+\item The first-order conditions for the two parties can be written as 
+\begin{eqnarray*}
+\text{Party }A\text{ -}\sum_{i=1}^{I}f^{i}(V(\mathbf{q}_{A};\alpha^{i})-V(\mathbf{q}_{B};\alpha ^{i}))\frac{\partial V(\mathbf{q}_{A};\alpha ^{i})}{\partial q_{jA}} &=&0, \\
+\text{Party }B\text{ - }\sum_{i=1}^{I}f^{i}(V(\mathbf{q}_{A};\alpha ^{i})-V(\mathbf{q}_{B};\alpha ^{i}))\frac{\partial V(\mathbf{q}_{B};\alpha ^{i})}{\partial q_{jB}} &=&0,
+\end{eqnarray*}
+each for j=1,..,n.
+\pause
+\item It must be that in a Nash equilibrium both parties will choose: $\mathbf{q}_{A}=\mathbf{q}_{B}.$
+\pause 
+\item We are then back to policy convergence! 
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{\frametitle{Optimal Choices}
+\begin{itemize}
+\item The FOCs for a maximum of (\ref{probablilistic}), evaluated at the equilibrium policy $\mathbf{q}_{A},$ and taking $\mathbf{q}_{B}$ as given, can be written as 
+$$ \sum_{i=1}^{I}f^{i}(0)\frac{\partial V(\mathbf{q}_{A};\alpha ^{i})}{\partial q_{jA}}=0\text{ for }j=1,..,n  $$
+where $\mathbf{q}_{A}=(q_{1A},..,q_{jA},..)$ for all $j$, and $f^{i}(0)$ denotes the density of the c.d.f. $F^{i}(\cdot )$, evaluated at 0 (that is, in equilibrium) when $V(\mathbf{q}_{A};\alpha ^{i})=V(\mathbf{q}_{B};\alpha ^{i})$. 
+\pause 
+\item Thus, the equilibrium under this form of electoral competition
+implements the maximum of a particular weighted social welfare function, where voter $i$ receives weight $f^{i}(0)$. 
+\pause 
+\item In other words, we have that the equilibrium policies are determined as
+$$ \mathbf{q}^{\ast }\in \arg \max_{\mathbf{q}}\sum_{i=1}^{I}f^{i}(0)V(\mathbf{q};\alpha ^{i}) $$
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{\frametitle{Interpretation}
+\begin{itemize}
+\item Voters with higher $f^{i}(0)$ weigh more heavily, because in a
+neighborhood of the equilibrium they are more likely to reward policy favors with their vote. 
+\pause 
+\item We can think of a group with high $f^{i}(0)$ as a group of 
+\textit{swing voters}.
+\pause 
+\item In other words, more ``responsive'' voters, who have a higher density $f^{i}(0)$, receive a better treatment under electoral competition. 
+\pause 
+\item Clearly, if all voters are equally responsive (if they all have the same value of $f^{i}(0)$), this form of electoral competition implements the utilitarian optimum.
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Extensions of the basic PV model}
+
+One reason that the Probabilistic Voting model has become so popular is that many of the parameters have intuitive interpretations. We can derive lots of additional insights by extending the basic model in various ways.
+\pause 
+
+Examples:
+\begin{itemize}
+\item Divide voters into 3 classes: poor, middle class, rich. (Persson & Tabellini -- simplified version in PT pp. 53-57)
+\pause 
+\item Characterize voters as ``ideological'' or ``swing'' voters. Allow the incumbent to use repression/violence against certain groups as well as proposing a policy platform (Robinson \& Torvik, 2009) 
+
+\end{itemize}
+
+\end{frame}
+
+\end{document}
